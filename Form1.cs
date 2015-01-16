@@ -18,28 +18,18 @@ namespace FovChanger
         Process[] myProcess;
         string gameName, processName;
      
-        float  fov;
-
-        float fovDeltaIncrease = 1;
-        float fovDeltaDecrease = 1;
+        float  fov=90;
 
         float readFov = 0;
         int[] offsets = new int[] { 0x10, 0x40, 0x3c4, 0x244 };
 
         int fovAddress = 0x01409338;
-        bool pointerAddress = true;
 
         Keys Key = Keys.P;
-
-        Keys KeyIncrease = Keys.None;
-        Keys KeyDecrease = Keys.None;
 
         bool autoMode;
         
         bool settingInputKey;
-        bool settingIncreaseKey;
-        bool settingDecreaseKey;
-
 
         string labelUrl = "www.pcgamingwiki.com";
 
@@ -54,7 +44,6 @@ namespace FovChanger
             imgNotSA = Properties.Resources.No;
             gameName = "moh";
             processName = "moh";
-            InitAdvanced();
         }
 
         bool foundProcess = false;
@@ -76,10 +65,7 @@ namespace FovChanger
                 LB_Running.Text = "MEDAL OF HONOR IS RUNNING";
                 LB_Running.ForeColor = Color.Green;
 
-                if (pointerAddress)
                   readFov = Trainer.ReadPointerFloat(processName, baseAddress+ fovAddress,  offsets);
-                else
-                  readFov = Trainer.ReadFloat(processName, fovAddress);
 
                 L_fov.Text = readFov.ToString();
 
@@ -91,7 +77,7 @@ namespace FovChanger
                 // The game process has not been found, reseting values.
                 LB_Running.Text = "MOH IS NOT RUNNING";
                 LB_Running.ForeColor = Color.Red;
-                ResetValues();
+                //ResetValues();
             }
         }
 
@@ -99,7 +85,6 @@ namespace FovChanger
         // Used to reset all the values.
         private void ResetValues()
         {
-            fov = 0;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -110,37 +95,21 @@ namespace FovChanger
 
         public void InitHotkey()
         {
-
-
             if (!KeyGrabber.Hooked)
             {
-                KeyGrabber.key.Clear();
                 KeyGrabber.keyPressEvent += KeyGrabber_KeyPress;
+                KeyGrabber.key.Clear();
                 if (Key != Keys.None)
                     KeyGrabber.key.Add(Key);
 
-                KeyGrabber.key.Add(KeyIncrease);
-                KeyGrabber.key.Add(KeyDecrease);
                 KeyGrabber.SetHook();
             }
             else
             {
                 if (Key != Keys.None)
                     KeyGrabber.key.Add(Key);
-
-                KeyGrabber.key.Add(KeyIncrease);
-                KeyGrabber.key.Add(KeyDecrease);
             }
 
-        }
-
-
-        public void InitAdvanced()
-        {
-            T_decrease.Text = fovDeltaDecrease.ToString();
-            T_Increase.Text = fovDeltaIncrease.ToString();
-            C_Decrease.Text = KeyDecrease.ToString();
-            C_Increase.Text = KeyIncrease.ToString();
         }
 
         public void UnHook()
@@ -148,24 +117,18 @@ namespace FovChanger
             KeyGrabber.UnHook();
         }
 
-
         private void KeyGrabber_KeyPress(object sender, EventArgs e)
         {
-            if (((Keys)sender) == KeyDecrease)
-                fov -= fovDeltaDecrease;
-            else if (((Keys)sender) == KeyIncrease)
-                fov += fovDeltaIncrease;
-                
             ChangeFov();
         }
 
         void ChangeFov()
         {
             if (fovAddress != 0x0000000 && foundProcess)
-                if (pointerAddress)
+                if(readFov != fov)
+                {
                     Trainer.WritePointerFloat(processName, baseAddress+ fovAddress, offsets, fov);
-                else
-                    Trainer.WriteFloat(processName, fovAddress, fov);
+                }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -175,22 +138,6 @@ namespace FovChanger
                 Key = keyData;
                 B_Key.Text = Key.ToString();
                 B_Key.Checked = false;
-                InitHotkey();
-                return true;
-            }
-            else if (settingDecreaseKey)
-            {
-                KeyDecrease = keyData;
-                C_Decrease.Text = KeyDecrease.ToString();
-                C_Decrease.Checked = false;
-                InitHotkey();
-                return true;
-            }
-            else if (settingIncreaseKey)
-            {
-                KeyIncrease = keyData;
-                C_Increase.Text = KeyIncrease.ToString();
-                C_Increase.Checked = false;
                 InitHotkey();
                 return true;
             }
@@ -228,6 +175,10 @@ namespace FovChanger
                 B_Key.Enabled = false;
                 autoMode = true;
             }
+            else
+            {
+                autoMode = false;
+            }
         }
 
         private void C_KeyMode_CheckedChanged(object sender, EventArgs e)
@@ -258,51 +209,5 @@ namespace FovChanger
         {
             Process.Start(labelUrl);
         }
-
-        private void C_Increase_CheckedChanged(object sender, EventArgs e)
-        {
-            if (C_Increase.Checked)
-            {
-                settingIncreaseKey = true;
-                C_Increase.Text = "";
-                C_Increase.Checked = true;
-            }
-            else
-            {
-                settingIncreaseKey = false;
-            }
-        }
-
-        private void C_Decrease_CheckedChanged(object sender, EventArgs e)
-        {
-            if (C_Decrease.Checked)
-            {
-                settingDecreaseKey = true;
-                C_Decrease.Text = "";
-            }
-            else
-            {
-                settingDecreaseKey = false;
-            }
-        }
-
-        private void B_SetIncrease_Click(object sender, EventArgs e)
-        {
-            var res = 0f;
-            if (float.TryParse(T_Input.Text, out res))
-            {
-                fovDeltaIncrease = res;
-            }
-        }
-
-        private void B_SetDecrease_Click(object sender, EventArgs e)
-        {
-            var res = 0f;
-            if (float.TryParse(T_Input.Text, out res))
-            {
-                fovDeltaDecrease = res;
-            }
-        }
-
     }
 }

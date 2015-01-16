@@ -40,22 +40,12 @@
             this.linkLabel = new System.Windows.Forms.LinkLabel();
             this.B_set = new System.Windows.Forms.Button();
             this.KeyPanel = new System.Windows.Forms.Panel();
-            this.advancedFeatures = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.B_SetDecrease = new System.Windows.Forms.Button();
-            this.B_SetIncrease = new System.Windows.Forms.Button();
-            this.T_decrease = new System.Windows.Forms.TextBox();
-            this.T_Increase = new System.Windows.Forms.TextBox();
-            this.C_Decrease = new System.Windows.Forms.CheckBox();
-            this.C_Increase = new System.Windows.Forms.CheckBox();
             this.B_Key = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.L_fov = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.InputPanel.SuspendLayout();
             this.KeyPanel.SuspendLayout();
-            this.advancedFeatures.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -123,15 +113,15 @@
             this.InputPanel.Controls.Add(this.T_Input);
             this.InputPanel.Controls.Add(this.C_AutoMode);
             this.InputPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.InputPanel.Location = new System.Drawing.Point(0, 65);
+            this.InputPanel.Location = new System.Drawing.Point(0, 60);
             this.InputPanel.Name = "InputPanel";
-            this.InputPanel.Size = new System.Drawing.Size(302, 232);
+            this.InputPanel.Size = new System.Drawing.Size(302, 151);
             this.InputPanel.TabIndex = 41;
             // 
             // linkLabel
             // 
             this.linkLabel.AutoSize = true;
-            this.linkLabel.Location = new System.Drawing.Point(8, 209);
+            this.linkLabel.Location = new System.Drawing.Point(8, 130);
             this.linkLabel.Name = "linkLabel";
             this.linkLabel.Size = new System.Drawing.Size(84, 13);
             this.linkLabel.TabIndex = 43;
@@ -151,104 +141,12 @@
             // 
             // KeyPanel
             // 
-            this.KeyPanel.Controls.Add(this.advancedFeatures);
             this.KeyPanel.Controls.Add(this.B_Key);
             this.KeyPanel.Controls.Add(this.C_KeyMode);
             this.KeyPanel.Location = new System.Drawing.Point(11, 90);
             this.KeyPanel.Name = "KeyPanel";
-            this.KeyPanel.Size = new System.Drawing.Size(278, 113);
+            this.KeyPanel.Size = new System.Drawing.Size(278, 37);
             this.KeyPanel.TabIndex = 41;
-            // 
-            // advancedFeatures
-            // 
-            this.advancedFeatures.Controls.Add(this.label4);
-            this.advancedFeatures.Controls.Add(this.label3);
-            this.advancedFeatures.Controls.Add(this.B_SetDecrease);
-            this.advancedFeatures.Controls.Add(this.B_SetIncrease);
-            this.advancedFeatures.Controls.Add(this.T_decrease);
-            this.advancedFeatures.Controls.Add(this.T_Increase);
-            this.advancedFeatures.Controls.Add(this.C_Decrease);
-            this.advancedFeatures.Controls.Add(this.C_Increase);
-            this.advancedFeatures.Location = new System.Drawing.Point(3, 41);
-            this.advancedFeatures.Name = "advancedFeatures";
-            this.advancedFeatures.Size = new System.Drawing.Size(272, 69);
-            this.advancedFeatures.TabIndex = 42;
-            this.advancedFeatures.TabStop = false;
-            this.advancedFeatures.Text = "Advanced features";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 47);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 13);
-            this.label4.TabIndex = 47;
-            this.label4.Text = "Decrease FOV";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 21);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 13);
-            this.label3.TabIndex = 46;
-            this.label3.Text = "Increase FOV";
-            // 
-            // B_SetDecrease
-            // 
-            this.B_SetDecrease.Location = new System.Drawing.Point(226, 41);
-            this.B_SetDecrease.Name = "B_SetDecrease";
-            this.B_SetDecrease.Size = new System.Drawing.Size(45, 23);
-            this.B_SetDecrease.TabIndex = 45;
-            this.B_SetDecrease.Text = "Set";
-            this.B_SetDecrease.UseVisualStyleBackColor = true;
-            this.B_SetDecrease.Click += new System.EventHandler(this.B_SetDecrease_Click);
-            // 
-            // B_SetIncrease
-            // 
-            this.B_SetIncrease.Location = new System.Drawing.Point(226, 13);
-            this.B_SetIncrease.Name = "B_SetIncrease";
-            this.B_SetIncrease.Size = new System.Drawing.Size(45, 23);
-            this.B_SetIncrease.TabIndex = 44;
-            this.B_SetIncrease.Text = "Set";
-            this.B_SetIncrease.UseVisualStyleBackColor = true;
-            this.B_SetIncrease.Click += new System.EventHandler(this.B_SetIncrease_Click);
-            // 
-            // T_decrease
-            // 
-            this.T_decrease.Location = new System.Drawing.Point(166, 43);
-            this.T_decrease.Name = "T_decrease";
-            this.T_decrease.Size = new System.Drawing.Size(54, 20);
-            this.T_decrease.TabIndex = 3;
-            // 
-            // T_Increase
-            // 
-            this.T_Increase.Location = new System.Drawing.Point(166, 16);
-            this.T_Increase.Name = "T_Increase";
-            this.T_Increase.Size = new System.Drawing.Size(54, 20);
-            this.T_Increase.TabIndex = 2;
-            // 
-            // C_Decrease
-            // 
-            this.C_Decrease.Appearance = System.Windows.Forms.Appearance.Button;
-            this.C_Decrease.Location = new System.Drawing.Point(97, 42);
-            this.C_Decrease.Name = "C_Decrease";
-            this.C_Decrease.Size = new System.Drawing.Size(63, 24);
-            this.C_Decrease.TabIndex = 1;
-            this.C_Decrease.Text = "Decrease";
-            this.C_Decrease.UseVisualStyleBackColor = true;
-            this.C_Decrease.CheckedChanged += new System.EventHandler(this.C_Decrease_CheckedChanged);
-            // 
-            // C_Increase
-            // 
-            this.C_Increase.Appearance = System.Windows.Forms.Appearance.Button;
-            this.C_Increase.Location = new System.Drawing.Point(98, 14);
-            this.C_Increase.Name = "C_Increase";
-            this.C_Increase.Size = new System.Drawing.Size(62, 24);
-            this.C_Increase.TabIndex = 0;
-            this.C_Increase.Text = "Increase";
-            this.C_Increase.UseVisualStyleBackColor = true;
-            this.C_Increase.CheckedChanged += new System.EventHandler(this.C_Increase_CheckedChanged);
             // 
             // B_Key
             // 
@@ -270,7 +168,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(302, 41);
+            this.panel1.Size = new System.Drawing.Size(302, 36);
             this.panel1.TabIndex = 42;
             // 
             // L_fov
@@ -296,7 +194,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(302, 297);
+            this.ClientSize = new System.Drawing.Size(302, 211);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.InputPanel);
             this.Controls.Add(this.LB_Running);
@@ -311,8 +209,6 @@
             this.InputPanel.PerformLayout();
             this.KeyPanel.ResumeLayout(false);
             this.KeyPanel.PerformLayout();
-            this.advancedFeatures.ResumeLayout(false);
-            this.advancedFeatures.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -335,15 +231,6 @@
         private System.Windows.Forms.CheckBox B_Key;
         private System.Windows.Forms.Button B_set;
         private System.Windows.Forms.LinkLabel linkLabel;
-        private System.Windows.Forms.GroupBox advancedFeatures;
-        private System.Windows.Forms.TextBox T_decrease;
-        private System.Windows.Forms.TextBox T_Increase;
-        private System.Windows.Forms.CheckBox C_Decrease;
-        private System.Windows.Forms.CheckBox C_Increase;
-        private System.Windows.Forms.Button B_SetIncrease;
-        private System.Windows.Forms.Button B_SetDecrease;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
     }
 }
 
