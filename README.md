@@ -1,5 +1,5 @@
 Medal of Honor FOV Changer
 ============
-To do:
-Fix decreasing and increasing FOV with buttons.
-Clean it!
+This is my simple FOV Changer for Medal of Honor (2010).
+
+PCGW: http://pcgamingwiki.com/wiki/User:Suicide_machine
