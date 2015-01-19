@@ -51,13 +51,15 @@ namespace FovChanger
         private void Timer_Tick(object sender, EventArgs e)
         {
             myProcess = Process.GetProcessesByName(processName);
-            if (myProcess.Length > 0 && !foundProcess)
+            if (myProcess.Length > 0)
             {
                 IntPtr startOffset = myProcess[0].MainModule.BaseAddress;
                 IntPtr endOffset = IntPtr.Add(startOffset, myProcess[0].MainModule.ModuleMemorySize);
                 baseAddress = startOffset.ToInt32();
                 foundProcess = true;
             }
+            else
+                foundProcess = false;
 
             if (foundProcess)
             {
@@ -65,7 +67,7 @@ namespace FovChanger
                 LB_Running.Text = "MEDAL OF HONOR IS RUNNING";
                 LB_Running.ForeColor = Color.Green;
 
-                  readFov = Trainer.ReadPointerFloat(processName, baseAddress+ fovAddress,  offsets);
+                readFov = Trainer.ReadPointerFloat(processName, baseAddress+ fovAddress,  offsets);
 
                 L_fov.Text = readFov.ToString();
 
@@ -77,7 +79,7 @@ namespace FovChanger
                 // The game process has not been found, reseting values.
                 LB_Running.Text = "MOH IS NOT RUNNING";
                 LB_Running.ForeColor = Color.Red;
-                //ResetValues();
+                ResetValues();
             }
         }
 
@@ -85,6 +87,7 @@ namespace FovChanger
         // Used to reset all the values.
         private void ResetValues()
         {
+            L_fov.Text = "0";
         }
 
         private void Form1_Load(object sender, EventArgs e)
