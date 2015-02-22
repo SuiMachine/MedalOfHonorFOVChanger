@@ -14,7 +14,6 @@ namespace FovChanger
 
         // Other variables.
         System.Text.Encoding enc = System.Text.Encoding.UTF8;
-        Image imgSA, imgNotSA;
         Process[] myProcess;
         string gameName, processName;
      
@@ -32,6 +31,7 @@ namespace FovChanger
         bool settingInputKey;
 
         string labelUrl = "www.pcgamingwiki.com";
+        string developerURL = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4A2YA7GVWFGM2";
 
 
         /*------------------
@@ -40,8 +40,6 @@ namespace FovChanger
         public Form1()
         {
             InitializeComponent();
-            imgSA = Properties.Resources.Yes;
-            imgNotSA = Properties.Resources.No;
             gameName = "moh";
             processName = "moh";
         }
@@ -53,6 +51,9 @@ namespace FovChanger
             myProcess = Process.GetProcessesByName(processName);
             if (myProcess.Length > 0)
             {
+                if (foundProcess == false)
+                    System.Threading.Thread.Sleep(2000);
+
                 IntPtr startOffset = myProcess[0].MainModule.BaseAddress;
                 IntPtr endOffset = IntPtr.Add(startOffset, myProcess[0].MainModule.ModuleMemorySize);
                 baseAddress = startOffset.ToInt32();
@@ -110,7 +111,10 @@ namespace FovChanger
             else
             {
                 if (Key != Keys.None)
+                {
+                    KeyGrabber.key.Clear();
                     KeyGrabber.key.Add(Key);
+                }
             }
 
         }
@@ -128,7 +132,7 @@ namespace FovChanger
         void ChangeFov()
         {
             if (fovAddress != 0x0000000 && foundProcess)
-                if(readFov != fov)
+                if(readFov != fov && !float.IsNaN(fov) && readFov!=0)
                 {
                     Trainer.WritePointerFloat(processName, baseAddress+ fovAddress, offsets, fov);
                 }
@@ -204,13 +208,29 @@ namespace FovChanger
             var res = 0f;
             if (float.TryParse(T_Input.Text, out res))
             {
-                fov = res;
+                if (res < 1.0)
+                {
+                    fov = 1.0f;
+                    T_Input.Text = fov.ToString();
+                }
+                else if (res > 179)
+                {
+                    fov = 179.0f;
+                    T_Input.Text = fov.ToString();
+                }
+                else
+                    fov = res;
             }
         }
 
         private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start(labelUrl);
+        }
+
+        private void DeveloperButton_Click(object sender, EventArgs e)
+        {
+            Process.Start(developerURL);
         }
     }
 }

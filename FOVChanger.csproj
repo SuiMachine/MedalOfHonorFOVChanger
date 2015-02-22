@@ -63,7 +63,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SACombination.cs" />
     <Compile Include="Trainer.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -85,8 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Hitman.ico" />
-    <None Include="Resources\Yes.png" />
-    <None Include="Resources\No.png" />
+    <None Include="Resources\donatebutton.png" />
     <None Include="Resources\Bar.png" />
   </ItemGroup>
   <ItemGroup />

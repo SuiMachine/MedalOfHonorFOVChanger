@@ -44,9 +44,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.L_fov = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.DeveloperButton = new System.Windows.Forms.PictureBox();
             this.InputPanel.SuspendLayout();
             this.KeyPanel.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DeveloperButton)).BeginInit();
             this.SuspendLayout();
             // 
             // Timer
@@ -106,6 +108,7 @@
             // InputPanel
             // 
             this.InputPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.InputPanel.Controls.Add(this.DeveloperButton);
             this.InputPanel.Controls.Add(this.linkLabel);
             this.InputPanel.Controls.Add(this.B_set);
             this.InputPanel.Controls.Add(this.KeyPanel);
@@ -113,15 +116,15 @@
             this.InputPanel.Controls.Add(this.T_Input);
             this.InputPanel.Controls.Add(this.C_AutoMode);
             this.InputPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.InputPanel.Location = new System.Drawing.Point(0, 60);
+            this.InputPanel.Location = new System.Drawing.Point(0, 67);
             this.InputPanel.Name = "InputPanel";
-            this.InputPanel.Size = new System.Drawing.Size(302, 151);
+            this.InputPanel.Size = new System.Drawing.Size(302, 168);
             this.InputPanel.TabIndex = 41;
             // 
             // linkLabel
             // 
             this.linkLabel.AutoSize = true;
-            this.linkLabel.Location = new System.Drawing.Point(8, 130);
+            this.linkLabel.Location = new System.Drawing.Point(20, 137);
             this.linkLabel.Name = "linkLabel";
             this.linkLabel.Size = new System.Drawing.Size(84, 13);
             this.linkLabel.TabIndex = 43;
@@ -168,7 +171,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(302, 36);
+            this.panel1.Size = new System.Drawing.Size(302, 43);
             this.panel1.TabIndex = 42;
             // 
             // L_fov
@@ -190,11 +193,22 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Current Fov";
             // 
+            // DeveloperButton
+            // 
+            this.DeveloperButton.Image = global::FovChanger.Properties.Resources.donatebutton;
+            this.DeveloperButton.Location = new System.Drawing.Point(156, 133);
+            this.DeveloperButton.Name = "DeveloperButton";
+            this.DeveloperButton.Size = new System.Drawing.Size(74, 21);
+            this.DeveloperButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.DeveloperButton.TabIndex = 44;
+            this.DeveloperButton.TabStop = false;
+            this.DeveloperButton.Click += new System.EventHandler(this.DeveloperButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(302, 211);
+            this.ClientSize = new System.Drawing.Size(302, 235);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.InputPanel);
             this.Controls.Add(this.LB_Running);
@@ -211,6 +225,7 @@
             this.KeyPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DeveloperButton)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -231,6 +246,7 @@
         private System.Windows.Forms.CheckBox B_Key;
         private System.Windows.Forms.Button B_set;
         private System.Windows.Forms.LinkLabel linkLabel;
+        private System.Windows.Forms.PictureBox DeveloperButton;
     }
 }
 
