@@ -42,3 +42,12 @@ Network Trash Folder
 Temporary Items
 .apdisk
 obj
+
+*.sublime-workspace
+obj/
+bin/
+*.suo
+*.user
+*.vspx
+*.psess
+*.rar
