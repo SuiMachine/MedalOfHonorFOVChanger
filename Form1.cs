@@ -15,7 +15,7 @@ namespace FovChanger
         // Other variables.
         System.Text.Encoding enc = System.Text.Encoding.UTF8;
         Process[] myProcess;
-        string gameName, processName;
+        string processName;
      
         float  fov=90;
 
@@ -31,7 +31,7 @@ namespace FovChanger
         bool settingInputKey;
 
         string labelUrl = "www.pcgamingwiki.com";
-        string developerURL = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4A2YA7GVWFGM2";
+        string developerURL = "https://www.twitchalerts.com/donate/suicidemachine";
 
 
         /*------------------
@@ -40,7 +40,6 @@ namespace FovChanger
         public Form1()
         {
             InitializeComponent();
-            gameName = "moh";
             processName = "moh";
         }
 
@@ -48,39 +47,46 @@ namespace FovChanger
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            myProcess = Process.GetProcessesByName(processName);
-            if (myProcess.Length > 0)
+            try
             {
-                if (foundProcess == false)
-                    System.Threading.Thread.Sleep(2000);
+                myProcess = Process.GetProcessesByName(processName);
+                if (myProcess.Length > 0)
+                {
+                    if (foundProcess == false)
+                        System.Threading.Thread.Sleep(100);
 
-                IntPtr startOffset = myProcess[0].MainModule.BaseAddress;
-                IntPtr endOffset = IntPtr.Add(startOffset, myProcess[0].MainModule.ModuleMemorySize);
-                baseAddress = startOffset.ToInt32();
-                foundProcess = true;
+                    IntPtr startOffset = myProcess[0].MainModule.BaseAddress;
+                    IntPtr endOffset = IntPtr.Add(startOffset, myProcess[0].MainModule.ModuleMemorySize);
+                    baseAddress = startOffset.ToInt32();
+                    foundProcess = true;
+                }
+                else
+                    foundProcess = false;
+
+                if (foundProcess)
+                {
+                    // The game is running, ready for memory reading.
+                    LB_Running.Text = "MEDAL OF HONOR IS RUNNING";
+                    LB_Running.ForeColor = Color.Green;
+
+                    readFov = Trainer.ReadPointerFloat(processName, baseAddress + fovAddress, offsets);
+
+                    L_fov.Text = readFov.ToString();
+
+                    if (autoMode)
+                        ChangeFov();
+                }
+                else
+                {
+                    // The game process has not been found, reseting values.
+                    LB_Running.Text = "MOH IS NOT RUNNING";
+                    LB_Running.ForeColor = Color.Red;
+                    ResetValues();
+                }
             }
-            else
-                foundProcess = false;
-
-            if (foundProcess)
+            catch(Exception ex)
             {
-                // The game is running, ready for memory reading.
-                LB_Running.Text = "MEDAL OF HONOR IS RUNNING";
-                LB_Running.ForeColor = Color.Green;
-
-                readFov = Trainer.ReadPointerFloat(processName, baseAddress+ fovAddress,  offsets);
-
-                L_fov.Text = readFov.ToString();
-
-                if (autoMode)
-                    ChangeFov();
-            }
-            else
-            {
-                // The game process has not been found, reseting values.
-                LB_Running.Text = "MOH IS NOT RUNNING";
-                LB_Running.ForeColor = Color.Red;
-                ResetValues();
+                Debug.WriteLine(ex.ToString());
             }
         }
 
