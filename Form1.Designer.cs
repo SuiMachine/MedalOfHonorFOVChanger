@@ -36,6 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.C_AutoMode = new System.Windows.Forms.CheckBox();
             this.InputPanel = new System.Windows.Forms.Panel();
+            this.C_ChangeVIewModelFOV = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.donateLink = new System.Windows.Forms.LinkLabel();
             this.linkLabel = new System.Windows.Forms.LinkLabel();
@@ -71,6 +72,7 @@
             this.T_Input.Size = new System.Drawing.Size(137, 20);
             this.T_Input.TabIndex = 37;
             this.T_Input.Text = "90";
+            this.T_Input.KeyUp += new System.Windows.Forms.KeyEventHandler(this.T_Input_KeyUp);
             // 
             // label1
             // 
@@ -95,16 +97,30 @@
             // InputPanel
             // 
             this.InputPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.InputPanel.Controls.Add(this.C_ChangeVIewModelFOV);
             this.InputPanel.Controls.Add(this.panel2);
             this.InputPanel.Controls.Add(this.B_set);
             this.InputPanel.Controls.Add(this.label1);
             this.InputPanel.Controls.Add(this.T_Input);
             this.InputPanel.Controls.Add(this.C_AutoMode);
             this.InputPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.InputPanel.Location = new System.Drawing.Point(0, 65);
+            this.InputPanel.Location = new System.Drawing.Point(0, 68);
             this.InputPanel.Name = "InputPanel";
-            this.InputPanel.Size = new System.Drawing.Size(263, 99);
+            this.InputPanel.Size = new System.Drawing.Size(263, 122);
             this.InputPanel.TabIndex = 41;
+            // 
+            // C_ChangeVIewModelFOV
+            // 
+            this.C_ChangeVIewModelFOV.AutoSize = true;
+            this.C_ChangeVIewModelFOV.Checked = true;
+            this.C_ChangeVIewModelFOV.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.C_ChangeVIewModelFOV.Location = new System.Drawing.Point(10, 54);
+            this.C_ChangeVIewModelFOV.Name = "C_ChangeVIewModelFOV";
+            this.C_ChangeVIewModelFOV.Size = new System.Drawing.Size(146, 17);
+            this.C_ChangeVIewModelFOV.TabIndex = 45;
+            this.C_ChangeVIewModelFOV.Text = "Change Viewmodels FOV";
+            this.C_ChangeVIewModelFOV.UseVisualStyleBackColor = true;
+            this.C_ChangeVIewModelFOV.CheckedChanged += new System.EventHandler(this.C_ChangeVIewModelFOV_CheckedChanged);
             // 
             // panel2
             // 
@@ -112,7 +128,7 @@
             this.panel2.Controls.Add(this.donateLink);
             this.panel2.Controls.Add(this.linkLabel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 58);
+            this.panel2.Location = new System.Drawing.Point(0, 81);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(261, 39);
             this.panel2.TabIndex = 44;
@@ -157,7 +173,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(263, 41);
+            this.panel1.Size = new System.Drawing.Size(263, 44);
             this.panel1.TabIndex = 42;
             // 
             // L_fov
@@ -183,7 +199,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(263, 164);
+            this.ClientSize = new System.Drawing.Size(263, 190);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.InputPanel);
             this.Controls.Add(this.LB_Running);
@@ -219,6 +235,7 @@
         private System.Windows.Forms.LinkLabel linkLabel;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.LinkLabel donateLink;
+        private System.Windows.Forms.CheckBox C_ChangeVIewModelFOV;
     }
 }
 

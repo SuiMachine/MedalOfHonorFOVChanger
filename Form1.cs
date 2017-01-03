@@ -28,8 +28,8 @@ namespace FovChanger
         float writeViewModelFOV = 0;
 
         bool changeViewModels = true;
-        int viewModelBaseAddress = 0x015F3870;
-        int[] offsetsViewmodels = new int[] { 0x78, 0x274, 0x4e8 };
+        int viewModelBaseAddress = 0x015EA13C;
+        int[] offsetsViewmodels = new int[] { 0x8, 0x48, 0x424, 0x4e8 };
 
         bool autoMode = false;
 
@@ -134,13 +134,6 @@ namespace FovChanger
         }
 
 
-
-
-        private void KeyGrabber_KeyPress(object sender, EventArgs e)
-        {
-            ChangeFov();
-        }
-
         void ChangeFov()
         {
             if (readFov != writeFOV && !float.IsNaN(writeFOV) && readFov != 0)
@@ -160,6 +153,11 @@ namespace FovChanger
         }
 
         private void B_set_Click(object sender, EventArgs e)
+        {
+            modifiedFOV();
+        }
+
+        private void modifiedFOV()
         {
             var res = 0f;
             if (float.TryParse(T_Input.Text, out res))
@@ -190,6 +188,19 @@ namespace FovChanger
         private void donateLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start(developerURL);
+        }
+
+        private void C_ChangeVIewModelFOV_CheckedChanged(object sender, EventArgs e)
+        {
+            changeViewModels = C_ChangeVIewModelFOV.Checked;
+        }
+
+        private void T_Input_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter )
+            {
+                modifiedFOV();
+            }
         }
     }
 }
