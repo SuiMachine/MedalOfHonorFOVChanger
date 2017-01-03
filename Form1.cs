@@ -17,21 +17,24 @@ namespace FovChanger
         Process[] myProcess;
         string processName;
      
-        float  fov=90;
+        float writeFOV = 90;
 
         float readFov = 0;
-        int[] offsets = new int[] { 0x10, 0x40, 0x3c4, 0x244 };
 
         int fovAddress = 0x01409338;
+        int[] offsets = new int[] { 0x10, 0x40, 0x3c4, 0x244 };
 
-        Keys Key = Keys.P;
+        float readViewModelFOV = 0;
+        float writeViewModelFOV = 0;
 
-        bool autoMode;
-        
-        bool settingInputKey;
+        bool changeViewModels = true;
+        int viewModelBaseAddress = 0x015F3870;
+        int[] offsetsViewmodels = new int[] { 0x78, 0x274, 0x4e8 };
 
-        string labelUrl = "www.pcgamingwiki.com";
-        string developerURL = "https://www.twitchalerts.com/donate/suicidemachine";
+        bool autoMode = false;
+
+        string labelUrl = "http://www.pcgamingwiki.com";
+        string developerURL = "https://www.gamingforgood.net/s/suicidemachine/widget";
 
 
         /*------------------
@@ -55,26 +58,39 @@ namespace FovChanger
                     if (foundProcess == false)
                         System.Threading.Thread.Sleep(100);
 
-                    IntPtr startOffset = myProcess[0].MainModule.BaseAddress;
-                    IntPtr endOffset = IntPtr.Add(startOffset, myProcess[0].MainModule.ModuleMemorySize);
-                    baseAddress = startOffset.ToInt32();
+                    if(baseAddress == 0x0)
+                    {
+                        IntPtr startOffset = myProcess[0].MainModule.BaseAddress;
+                        IntPtr endOffset = IntPtr.Add(startOffset, myProcess[0].MainModule.ModuleMemorySize);
+                        baseAddress = startOffset.ToInt32();
+                    }
+
                     foundProcess = true;
                 }
                 else
+                {
                     foundProcess = false;
+                    baseAddress = 0x0;
+                }
+
 
                 if (foundProcess)
                 {
                     // The game is running, ready for memory reading.
-                    LB_Running.Text = "MEDAL OF HONOR IS RUNNING";
+                    LB_Running.Text = "MOH IS RUNNING";
                     LB_Running.ForeColor = Color.Green;
 
-                    readFov = Trainer.ReadPointerFloat(processName, baseAddress + fovAddress, offsets);
+                    readFov = Trainer.ReadPointerFloat(myProcess, baseAddress + fovAddress, offsets);
+                    readViewModelFOV = Trainer.ReadPointerFloat(myProcess, baseAddress + viewModelBaseAddress, offsetsViewmodels);
 
                     L_fov.Text = readFov.ToString();
 
                     if (autoMode)
+                    {
                         ChangeFov();
+                        if (changeViewModels)
+                            ChangeViewModelFOV();
+                    }
                 }
                 else
                 {
@@ -90,6 +106,21 @@ namespace FovChanger
             }
         }
 
+        private void ChangeViewModelFOV()
+        {
+            if(readViewModelFOV > 0 && readViewModelFOV < 180 && readViewModelFOV != writeViewModelFOV)
+            {
+                recalculateViewModelFOV();
+                Trainer.WritePointerFloat(myProcess, baseAddress + viewModelBaseAddress, offsetsViewmodels, writeViewModelFOV);
+            }
+        }
+
+        private void recalculateViewModelFOV()
+        {
+            float multiplier = writeFOV / 70.0f;
+            writeViewModelFOV = 60.0f * multiplier;
+        }
+
         // Called when the game is not running or no mission is active.
         // Used to reset all the values.
         private void ResetValues()
@@ -99,36 +130,11 @@ namespace FovChanger
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            InitHotkey();
             Timer.Start();
         }
 
-        public void InitHotkey()
-        {
-            if (!KeyGrabber.Hooked)
-            {
-                KeyGrabber.keyPressEvent += KeyGrabber_KeyPress;
-                KeyGrabber.key.Clear();
-                if (Key != Keys.None)
-                    KeyGrabber.key.Add(Key);
 
-                KeyGrabber.SetHook();
-            }
-            else
-            {
-                if (Key != Keys.None)
-                {
-                    KeyGrabber.key.Clear();
-                    KeyGrabber.key.Add(Key);
-                }
-            }
 
-        }
-
-        public void UnHook()
-        {
-            KeyGrabber.UnHook();
-        }
 
         private void KeyGrabber_KeyPress(object sender, EventArgs e)
         {
@@ -137,76 +143,20 @@ namespace FovChanger
 
         void ChangeFov()
         {
-            if (fovAddress != 0x0000000 && foundProcess)
-                if(readFov != fov && !float.IsNaN(fov) && readFov!=0)
-                {
-                    Trainer.WritePointerFloat(processName, baseAddress+ fovAddress, offsets, fov);
-                }
-        }
-
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (settingInputKey)
+            if (readFov != writeFOV && !float.IsNaN(writeFOV) && readFov != 0)
             {
-                Key = keyData;
-                B_Key.Text = Key.ToString();
-                B_Key.Checked = false;
-                InitHotkey();
-                return true;
-            }
-                
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
-
-        private void B_Key_CheckedChanged(object sender, EventArgs e)
-        {
-            if (B_Key.Checked)
-            {
-                settingInputKey = true;
-                B_Key.Text = "";
-                C_KeyMode.Checked = true;
-            }
-            else
-            {
-                settingInputKey = false;
+                Trainer.WritePointerFloat(myProcess, baseAddress + fovAddress, offsets, writeFOV);
             }
         }
+        
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            UnHook();
         }
-
-
-        // Lazy way to do it i know, it would be better with events
 
         private void C_AutoMode_CheckedChanged(object sender, EventArgs e)
         {
-            if (C_AutoMode.Checked)
-            {
-                C_KeyMode.Checked = false;
-                B_Key.Enabled = false;
-                autoMode = true;
-            }
-            else
-            {
-                autoMode = false;
-            }
-        }
-
-        private void C_KeyMode_CheckedChanged(object sender, EventArgs e)
-        {
-            if (C_KeyMode.Checked)
-            {
-                C_AutoMode.Checked = false;
-                B_Key.Enabled = true;
-                autoMode = false;
-                InitHotkey();
-            }
-            else
-            {
-                UnHook();
-            }
+            autoMode = C_AutoMode.Checked;
         }
 
         private void B_set_Click(object sender, EventArgs e)
@@ -216,16 +166,19 @@ namespace FovChanger
             {
                 if (res < 1.0)
                 {
-                    fov = 1.0f;
-                    T_Input.Text = fov.ToString();
+                    writeFOV = 1.0f;
+                    T_Input.Text = writeFOV.ToString();
                 }
                 else if (res > 179)
                 {
-                    fov = 179.0f;
-                    T_Input.Text = fov.ToString();
+                    writeFOV = 179.0f;
+                    T_Input.Text = writeFOV.ToString();
                 }
                 else
-                    fov = res;
+                {
+                    writeFOV = res;
+                    recalculateViewModelFOV();
+                }
             }
         }
 
@@ -234,7 +187,7 @@ namespace FovChanger
             Process.Start(labelUrl);
         }
 
-        private void DeveloperButton_Click(object sender, EventArgs e)
+        private void donateLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start(developerURL);
         }
