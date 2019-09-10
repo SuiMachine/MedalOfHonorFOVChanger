@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"CameraFOV_P1"</Description>
+      <LastState Value="70" RealAddress="1FE72544"/>
+      <VariableType>Float</VariableType>
+      <Address>"moh.exe" +01409338</Address>
+      <Offsets>
+        <Offset>244</Offset>
+        <Offset>3C4</Offset>
+        <Offset>40</Offset>
+        <Offset>10</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"CameraFOV_P2"</Description>
+      <LastState Value="70" RealAddress="1FE72544"/>
+      <VariableType>Float</VariableType>
+      <Address>"moh.exe"+01557698</Address>
+      <Offsets>
+        <Offset>244</Offset>
+        <Offset>3C4</Offset>
+        <Offset>244</Offset>
+        <Offset>0</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"Viewmodel_P1"</Description>
+      <LastState Value="70" RealAddress="4845ACE8"/>
+      <VariableType>Float</VariableType>
+      <Address>"moh.exe"+015F38AC</Address>
+      <Offsets>
+        <Offset>4E8</Offset>
+        <Offset>424</Offset>
+        <Offset>28</Offset>
+        <Offset>0</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"Viewmodel_P2"</Description>
+      <LastState Value="70" RealAddress="4845ACE8"/>
+      <VariableType>Float</VariableType>
+      <Address>"moh.exe"+015F38AC</Address>
+      <Offsets>
+        <Offset>4E8</Offset>
+        <Offset>424</Offset>
+        <Offset>4C</Offset>
+        <Offset>0</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"Viewmodel_P3"</Description>
+      <LastState Value="70" RealAddress="4845ACE8"/>
+      <VariableType>Float</VariableType>
+      <Address>"moh.exe"+015EA13C</Address>
+      <Offsets>
+        <Offset>4E8</Offset>
+        <Offset>424</Offset>
+        <Offset>28</Offset>
+        <Offset>8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"Viewmodel_P4"</Description>
+      <LastState Value="70" RealAddress="4845ACE8"/>
+      <VariableType>Float</VariableType>
+      <Address>"moh.exe"+015EA13C</Address>
+      <Offsets>
+        <Offset>4E8</Offset>
+        <Offset>424</Offset>
+        <Offset>48</Offset>
+        <Offset>8</Offset>
+      </Offsets>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
