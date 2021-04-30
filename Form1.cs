@@ -20,7 +20,9 @@ namespace FovChanger
 
         float readFov = 0;
 
-        int fovAddress = 0x15D915C;
+        int fovAddressV49 = 0x15DA15C;
+        int fovAddressV48 = 0x15D915C;
+        int addressToUse = 0;
         int[] offsets = new int[] { 0x380, 0x0, 0x40, 0x3c4, 0x244 };
 
         float readViewModelFOV = 0;
@@ -58,6 +60,12 @@ namespace FovChanger
                         IntPtr startOffset = myProcess[0].MainModule.BaseAddress;
                         IntPtr endOffset = IntPtr.Add(startOffset, myProcess[0].MainModule.ModuleMemorySize);
                         baseAddress = startOffset.ToInt32();
+
+                        var details = myProcess[0].MainModule.FileVersionInfo;
+                        if (details.FileMajorPart == 1 && details.FileMinorPart == 0 && details.FileBuildPart == 4 && details.FilePrivatePart == 0)
+                            addressToUse = fovAddressV49;
+                        else
+                            addressToUse = fovAddressV48;
                     }
 
                     foundProcess = true;
@@ -75,8 +83,8 @@ namespace FovChanger
                     LB_Running.Text = "MOH IS RUNNING";
                     LB_Running.ForeColor = Color.Green;
 
-                    readFov = Trainer.ReadPointerFloat(myProcess, baseAddress + fovAddress, offsets);
-                    readViewModelFOV = Trainer.ReadPointerFloat(myProcess, baseAddress + fovAddress, offsetsViewmodels);
+                    readFov = Trainer.ReadPointerFloat(myProcess, baseAddress + addressToUse, offsets);
+                    readViewModelFOV = Trainer.ReadPointerFloat(myProcess, baseAddress + addressToUse, offsetsViewmodels);
 
                     L_fov.Text = readFov.ToString();
 
@@ -106,7 +114,7 @@ namespace FovChanger
             if(readViewModelFOV > 0 && readViewModelFOV < 180 && readViewModelFOV != writeViewModelFOV)
             {
                 recalculateViewModelFOV();
-                Trainer.WritePointerFloat(myProcess, baseAddress + fovAddress, offsetsViewmodels, writeViewModelFOV);
+                Trainer.WritePointerFloat(myProcess, baseAddress + addressToUse, offsetsViewmodels, writeViewModelFOV);
             }
         }
 
@@ -133,7 +141,7 @@ namespace FovChanger
         {
             if (readFov != writeFOV && !float.IsNaN(writeFOV) && readFov != 0)
             {
-                Trainer.WritePointerFloat(myProcess, baseAddress + fovAddress, offsets, writeFOV);
+                Trainer.WritePointerFloat(myProcess, baseAddress + addressToUse, offsets, writeFOV);
             }
         }
         
