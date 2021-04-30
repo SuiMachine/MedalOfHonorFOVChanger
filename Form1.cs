@@ -24,6 +24,7 @@ namespace FovChanger
         int fovAddressV48 = 0x15D915C;
         int addressToUse = 0;
         int[] offsets = new int[] { 0x380, 0x0, 0x40, 0x3c4, 0x244 };
+        float viewmodelMultiplier = 1.0f;
 
         float readViewModelFOV = 0;
         float writeViewModelFOV = 0;
@@ -41,6 +42,7 @@ namespace FovChanger
         {
             InitializeComponent();
             processName = "moh";
+            L_FOVMultiplierValue.Text = viewmodelMultiplier.ToString("0.000");
         }
 
         bool foundProcess = false;
@@ -111,7 +113,7 @@ namespace FovChanger
 
         private void ChangeViewModelFOV()
         {
-            if(readViewModelFOV > 0 && readViewModelFOV < 180 && readViewModelFOV != writeViewModelFOV)
+            if(readViewModelFOV > 0 && readViewModelFOV < 270 && readViewModelFOV != writeViewModelFOV)
             {
                 recalculateViewModelFOV();
                 Trainer.WritePointerFloat(myProcess, baseAddress + addressToUse, offsetsViewmodels, writeViewModelFOV);
@@ -121,7 +123,7 @@ namespace FovChanger
         private void recalculateViewModelFOV()
         {
             float multiplier = writeFOV / 70.0f;
-            writeViewModelFOV = 60.0f * multiplier;
+            writeViewModelFOV = 60.0f * multiplier * viewmodelMultiplier;
         }
 
         // Called when the game is not running or no mission is active.
@@ -204,6 +206,19 @@ namespace FovChanger
             {
                 modifiedFOV();
             }
+        }
+
+		private void TBar_Multiplier_Scroll(object sender, EventArgs e)
+		{
+            var percent = ((float)(TBar_Multiplier.Value) / TBar_Multiplier.Maximum);
+            viewmodelMultiplier = Lerp(0.5f, 1.5f, percent);
+            L_FOVMultiplierValue.Text = viewmodelMultiplier.ToString("0.000");
+            recalculateViewModelFOV();
+		}
+
+        float Lerp(float lowerBound, float upperBound, float percent)
+        {
+            return lowerBound * (1 - percent) + upperBound * percent;
         }
     }
 }
