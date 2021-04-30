@@ -13,7 +13,6 @@ namespace FovChanger
         int baseAddress = 0x0000000;
 
         // Other variables.
-        System.Text.Encoding enc = System.Text.Encoding.UTF8;
         Process[] myProcess;
         string processName;
      
@@ -21,25 +20,21 @@ namespace FovChanger
 
         float readFov = 0;
 
-        int fovAddress = 0x01409338;
-        int[] offsets = new int[] { 0x10, 0x40, 0x3c4, 0x244 };
+        int fovAddress = 0x15D915C;
+        int[] offsets = new int[] { 0x380, 0x0, 0x40, 0x3c4, 0x244 };
 
         float readViewModelFOV = 0;
         float writeViewModelFOV = 0;
 
         bool changeViewModels = true;
-        int viewModelBaseAddress = 0x015EA13C;
-        int[] offsetsViewmodels = new int[] { 0x8, 0x48, 0x424, 0x4e8 };
+        int[] offsetsViewmodels = new int[] { 0x380, 0x0, 0x1A4, 0x4e8 };
 
         bool autoMode = false;
 
         string labelUrl = "http://www.pcgamingwiki.com";
-        string developerURL = "https://www.gamingforgood.net/s/suicidemachine/widget";
+        string developerURL = "https://www.twitchalerts.com/donate/suicidemachine";
 
 
-        /*------------------
-        -- INITIALIZATION --
-        ------------------*/
         public Form1()
         {
             InitializeComponent();
@@ -81,7 +76,7 @@ namespace FovChanger
                     LB_Running.ForeColor = Color.Green;
 
                     readFov = Trainer.ReadPointerFloat(myProcess, baseAddress + fovAddress, offsets);
-                    readViewModelFOV = Trainer.ReadPointerFloat(myProcess, baseAddress + viewModelBaseAddress, offsetsViewmodels);
+                    readViewModelFOV = Trainer.ReadPointerFloat(myProcess, baseAddress + fovAddress, offsetsViewmodels);
 
                     L_fov.Text = readFov.ToString();
 
@@ -111,7 +106,7 @@ namespace FovChanger
             if(readViewModelFOV > 0 && readViewModelFOV < 180 && readViewModelFOV != writeViewModelFOV)
             {
                 recalculateViewModelFOV();
-                Trainer.WritePointerFloat(myProcess, baseAddress + viewModelBaseAddress, offsetsViewmodels, writeViewModelFOV);
+                Trainer.WritePointerFloat(myProcess, baseAddress + fovAddress, offsetsViewmodels, writeViewModelFOV);
             }
         }
 
