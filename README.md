@@ -10,5 +10,5 @@ Requirements:
 
 Credits
 -------
-  * [SuicideMachine](http://twitch.tv/suicidemachine)
+  * [SuicideMachine](http://twitch.tv/suimachine)
   * Original Trainer class was written by Cless.
