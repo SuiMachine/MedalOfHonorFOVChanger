@@ -5,10 +5,10 @@ This is my simple FOV Changer for Medal of Honor (2010). Simply download the exe
 Requirements:
 ----------
 * Medal of Honor (2010) - Singleplayer
-* [.NET 4.0 runtime libraries](https://www.microsoft.com/en-US/download/details.aspx?id=17718) installed
+* [.NET 4.8 runtime libraries](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48) installed
 * Administrator rights (it's required due to writting to other program's memory)
 
 Credits
 -------
-  * [SuicideMachine](http://twitch.tv/suimachine)
+  * [SuicideMachine](http://twitch.tv/sui_vt)
   * Original Trainer class was written by Cless.
