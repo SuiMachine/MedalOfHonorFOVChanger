@@ -35,9 +35,6 @@ namespace FovChanger
         bool autoMode = false;
 
         string labelUrl = "http://www.pcgamingwiki.com";
-        string developerURL = "https://www.twitchalerts.com/donate/suicidemachine";
-
-
         public Form1()
         {
             InitializeComponent();
@@ -188,11 +185,6 @@ namespace FovChanger
         private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start(labelUrl);
-        }
-
-        private void donateLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start(developerURL);
         }
 
         private void C_ChangeVIewModelFOV_CheckedChanged(object sender, EventArgs e)

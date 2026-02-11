@@ -36,21 +36,20 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.C_AutoMode = new System.Windows.Forms.CheckBox();
 			this.InputPanel = new System.Windows.Forms.Panel();
+			this.L_FOVMultiplierValue = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
+			this.TBar_Multiplier = new System.Windows.Forms.TrackBar();
 			this.C_ChangeVIewModelFOV = new System.Windows.Forms.CheckBox();
 			this.panel2 = new System.Windows.Forms.Panel();
-			this.donateLink = new System.Windows.Forms.LinkLabel();
 			this.linkLabel = new System.Windows.Forms.LinkLabel();
 			this.B_set = new System.Windows.Forms.Button();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.L_fov = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
-			this.TBar_Multiplier = new System.Windows.Forms.TrackBar();
-			this.label3 = new System.Windows.Forms.Label();
-			this.L_FOVMultiplierValue = new System.Windows.Forms.Label();
 			this.InputPanel.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.TBar_Multiplier)).BeginInit();
 			this.panel2.SuspendLayout();
 			this.panel1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.TBar_Multiplier)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// Timer
@@ -111,10 +110,42 @@
 			this.InputPanel.Controls.Add(this.T_Input);
 			this.InputPanel.Controls.Add(this.C_AutoMode);
 			this.InputPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.InputPanel.Location = new System.Drawing.Point(0, 81);
+			this.InputPanel.Location = new System.Drawing.Point(0, 65);
 			this.InputPanel.Name = "InputPanel";
 			this.InputPanel.Size = new System.Drawing.Size(263, 213);
 			this.InputPanel.TabIndex = 41;
+			// 
+			// L_FOVMultiplierValue
+			// 
+			this.L_FOVMultiplierValue.Anchor = System.Windows.Forms.AnchorStyles.Top;
+			this.L_FOVMultiplierValue.Location = new System.Drawing.Point(3, 138);
+			this.L_FOVMultiplierValue.Name = "L_FOVMultiplierValue";
+			this.L_FOVMultiplierValue.Size = new System.Drawing.Size(252, 23);
+			this.L_FOVMultiplierValue.TabIndex = 48;
+			this.L_FOVMultiplierValue.Text = "1.0";
+			this.L_FOVMultiplierValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.label3.Location = new System.Drawing.Point(7, 74);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(125, 13);
+			this.label3.TabIndex = 47;
+			this.label3.Text = "Viewmodel multiplier:";
+			// 
+			// TBar_Multiplier
+			// 
+			this.TBar_Multiplier.LargeChange = 3;
+			this.TBar_Multiplier.Location = new System.Drawing.Point(10, 90);
+			this.TBar_Multiplier.Maximum = 40;
+			this.TBar_Multiplier.Name = "TBar_Multiplier";
+			this.TBar_Multiplier.Size = new System.Drawing.Size(245, 45);
+			this.TBar_Multiplier.TabIndex = 46;
+			this.TBar_Multiplier.TickStyle = System.Windows.Forms.TickStyle.Both;
+			this.TBar_Multiplier.Value = 20;
+			this.TBar_Multiplier.Scroll += new System.EventHandler(this.TBar_Multiplier_Scroll);
 			// 
 			// C_ChangeVIewModelFOV
 			// 
@@ -132,24 +163,12 @@
 			// panel2
 			// 
 			this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.panel2.Controls.Add(this.donateLink);
 			this.panel2.Controls.Add(this.linkLabel);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panel2.Location = new System.Drawing.Point(0, 172);
+			this.panel2.Location = new System.Drawing.Point(0, 185);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(261, 39);
+			this.panel2.Size = new System.Drawing.Size(261, 26);
 			this.panel2.TabIndex = 44;
-			// 
-			// donateLink
-			// 
-			this.donateLink.AutoSize = true;
-			this.donateLink.Location = new System.Drawing.Point(3, 18);
-			this.donateLink.Name = "donateLink";
-			this.donateLink.Size = new System.Drawing.Size(113, 13);
-			this.donateLink.TabIndex = 44;
-			this.donateLink.TabStop = true;
-			this.donateLink.Text = "Donate to a developer";
-			this.donateLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.donateLink_LinkClicked);
 			// 
 			// linkLabel
 			// 
@@ -180,7 +199,7 @@
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(0, 24);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(263, 57);
+			this.panel1.Size = new System.Drawing.Size(263, 41);
 			this.panel1.TabIndex = 42;
 			// 
 			// L_fov
@@ -202,43 +221,11 @@
 			this.label2.TabIndex = 0;
 			this.label2.Text = "Current Fov";
 			// 
-			// TBar_Multiplier
-			// 
-			this.TBar_Multiplier.LargeChange = 3;
-			this.TBar_Multiplier.Location = new System.Drawing.Point(10, 90);
-			this.TBar_Multiplier.Maximum = 40;
-			this.TBar_Multiplier.Name = "TBar_Multiplier";
-			this.TBar_Multiplier.Size = new System.Drawing.Size(245, 45);
-			this.TBar_Multiplier.TabIndex = 46;
-			this.TBar_Multiplier.TickStyle = System.Windows.Forms.TickStyle.Both;
-			this.TBar_Multiplier.Value = 20;
-			this.TBar_Multiplier.Scroll += new System.EventHandler(this.TBar_Multiplier_Scroll);
-			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.label3.Location = new System.Drawing.Point(7, 74);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(125, 13);
-			this.label3.TabIndex = 47;
-			this.label3.Text = "Viewmodel multiplier:";
-			// 
-			// L_FOVMultiplierValue
-			// 
-			this.L_FOVMultiplierValue.Anchor = System.Windows.Forms.AnchorStyles.Top;
-			this.L_FOVMultiplierValue.Location = new System.Drawing.Point(3, 138);
-			this.L_FOVMultiplierValue.Name = "L_FOVMultiplierValue";
-			this.L_FOVMultiplierValue.Size = new System.Drawing.Size(252, 23);
-			this.L_FOVMultiplierValue.TabIndex = 48;
-			this.L_FOVMultiplierValue.Text = "1.0";
-			this.L_FOVMultiplierValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(263, 294);
+			this.ClientSize = new System.Drawing.Size(263, 278);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.InputPanel);
 			this.Controls.Add(this.LB_Running);
@@ -251,11 +238,11 @@
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.InputPanel.ResumeLayout(false);
 			this.InputPanel.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.TBar_Multiplier)).EndInit();
 			this.panel2.ResumeLayout(false);
 			this.panel2.PerformLayout();
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.TBar_Multiplier)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -274,7 +261,6 @@
         private System.Windows.Forms.Button B_set;
         private System.Windows.Forms.LinkLabel linkLabel;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.LinkLabel donateLink;
         private System.Windows.Forms.CheckBox C_ChangeVIewModelFOV;
 		private System.Windows.Forms.Label L_FOVMultiplierValue;
 		private System.Windows.Forms.Label label3;
